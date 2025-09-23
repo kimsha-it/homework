@@ -91,19 +91,22 @@ console.log("---");
 let todosWithPriorityLabels;
 
 /* 로직 코드 작성 */
-// todosWithPriorityLabels = originTodos.map((element) => {    // 모르겠다
-//   let label;
-//   if (element.priority === HIGH_PRIORITY) {
-//     label= "[긴급]";
-//   } else if (element.priority === MEDIUM_PRIORITY) {
-//     label= "[보통]";
-//   } else if (element.priority === LOW_PRIORITY) {
-//     label= "[낮음]";
-//   }
-//   return element.text = `${label} ${element.text}`;
-// });
-// // 출력 코드
-// console.log(todosWithPriorityLabels);
+todosWithPriorityLabels = originTodos.map((element) => {
+  let label;
+  if (element.priority === HIGH_PRIORITY) {
+    label = "[긴급]";
+  } else if (element.priority === MEDIUM_PRIORITY) {
+    label = "[보통]";
+  } else if (element.priority === LOW_PRIORITY) {
+    label = "[낮음]";
+  }
+  return {
+    ...element, // 기존 속성 복사
+    text: `${label} ${element.text}`,
+  };
+});
+// 출력 코드
+console.log(todosWithPriorityLabels);
 
 /* 출력 결과
 [
@@ -121,7 +124,7 @@ console.log("---");
 let todoById3;
 
 /* 로직 코드 작성 */
-todoById3 = originTodos.filter((element) => {
+todoById3 = originTodos.find((element) => {
   if (element.id === 3) {
     return true;
   } else {
@@ -135,7 +138,7 @@ console.log("ID 3인 할 일:", todoById3);
 let todoById10;
 
 /* 로직 코드 작성 */
-todoById10 = originTodos.filter((element) => {
+todoById10 = originTodos.find((element) => {
   if (element.id === 10) {
     return true;
   } else {
@@ -224,7 +227,7 @@ let importantIncompleteTodos;
 importantIncompleteTodos = originTodos.filter((element) => {
   if (
     element.completed === IS_NOT_COMPLETED &&
-    element.priority === MEDIUM_PRIORITY
+    element.priority !== LOW_PRIORITY
   ) {
     return true;
   } else {
